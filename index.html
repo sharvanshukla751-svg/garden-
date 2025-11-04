@@ -6,106 +6,131 @@
   <title>Ecovista Gardening — Handcrafted Green Spaces</title>
   <meta name="description" content="Ecovista Gardening — Garden setup, vertical & balcony gardens, office & indoor plants, and maintenance in Lucknow." />
   <meta name="theme-color" content="#063114" />
-
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
   <style>
     :root{
-      --bg-900: #07120a;
-      --bg-800: #0b2612;
-      --accent: #28b24a;
-      --muted: #9faea1;
-      --glass: rgba(255,255,255,0.04);
-      --card-depth: 40px;
-      --max-width: 1200px;
+      --bg-1:#06140b;
+      --bg-2:#0b2714;
+      --accent:#28b24a;
+      --accent-2:#1f8a2a;
+      --muted:#9faea1;
+      --card-glass:rgba(255,255,255,0.035);
+      --card-depth:44px;
+      --max-w:1200px;
+      --radius:18px;
     }
-    html,body{height:100%;margin:0;font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;color:#e9f9ea;background:linear-gradient(180deg,var(--bg-900),var(--bg-800));-webkit-font-smoothing:antialiased}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;color:#eaf9ea;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));-webkit-font-smoothing:antialiased}
     a{color:inherit;text-decoration:none}
 
-    /* Stage & parallax layers */
-    .stage{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;perspective:1200px;overflow-x:hidden}
-    .layer{position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none;transition:transform .15s ease-out}
+    /* STAGE */
+    .stage{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;perspective:1400px;overflow-x:hidden}
+    .layer{position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none;transition:transform .14s cubic-bezier(.2,.8,.2,1)}
     .bg{
-      background-image: url('assets/banner.jpg'); /* <-- Replace with your banner (best: 1920x1080) */
-      background-size:cover;background-position:center;
-      filter:brightness(.55) contrast(.95) saturate(.95);
-      transform:translateZ(-160px) scale(1.22);
-      z-index:0;
+      background-image:url('assets/banner.jpg'); /* REPLACE: assets/banner.jpg with your banner (1920x1080 recommended) */
+      background-size:cover;background-position:center;filter:brightness(.55) contrast(.95) saturate(.96);
+      transform:translateZ(-180px) scale(1.24);z-index:0;
     }
-    .grain{background-image:radial-gradient(rgba(0,0,0,0.12) 1px, transparent 1px);background-size:60px 60px;opacity:.06;transform:translateZ(-80px) scale(1.12)}
-    .leaf{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 25% 20%, rgba(255,255,255,0.04), rgba(255,255,255,0));mix-blend-mode:soft-light;opacity:.48;transform:translateZ(-40px)}
+    .soft-grid{background-image:radial-gradient(rgba(0,0,0,0.12) 1px, transparent 1px);background-size:64px 64px;opacity:.06;transform:translateZ(-90px) scale(1.12)}
+    .orb{width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 25% 20%, rgba(255,255,255,0.04), rgba(255,255,255,0));mix-blend-mode:soft-light;opacity:.46;transform:translateZ(-50px)}
+    .orb.small{width:360px;height:360px}
 
-    /* Content container */
-    .wrap{width:min(96%,var(--max-width));margin:3rem auto;z-index:6;position:relative}
+    /* MAIN CARD */
+    .wrap{width:min(96%,var(--max-w));margin:3rem auto;z-index:6;position:relative}
     .card{
-      display:grid;grid-template-columns:1fr 380px;gap:28px;padding:36px;border-radius:20px;background:linear-gradient(180deg,var(--glass), rgba(255,255,255,0.01));backdrop-filter: blur(8px);box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      display:grid;grid-template-columns:1fr 380px;gap:28px;padding:36px;border-radius:var(--radius);background:linear-gradient(180deg,var(--card-glass), rgba(255,255,255,0.01));backdrop-filter: blur(8px);box-shadow: 0 30px 90px rgba(0,0,0,0.6);
       transform-style:preserve-3d;transition:transform .18s ease-out;
     }
-    @media(max-width:920px){ .card{grid-template-columns:1fr; padding:22px} .card .side{order:2} }
+    @media(max-width:920px){ .card{grid-template-columns:1fr;padding:22px} .card .side{order:2} }
 
-    /* Branding */
+    /* BRAND */
     .brand{display:flex;align-items:center;gap:16px}
-    .logo{
-      font-weight:800;font-size:64px;line-height:1;color:var(--accent);letter-spacing:-1px;
-      text-shadow: 0 4px 18px rgba(0,0,0,0.6);
+    .logo{font-weight:900;font-size:64px;line-height:1;color:var(--accent);letter-spacing:-1px;text-shadow:0 6px 24px rgba(0,0,0,0.6)}
+    .tag{font-weight:800;color:#79d282;letter-spacing:2px;margin-top:6px}
+
+    /* HERO */
+    .hero-title{font-size:32px;margin:10px 0 12px;color:#f3fff3;font-weight:800}
+    .lead{color:rgba(240,255,240,0.95);font-size:17px;line-height:1.6;max-width:62ch;margin-bottom:14px}
+
+    /* SERVICES */
+    .services{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+    .svc{
+      background:linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      padding:12px 16px;border-radius:12px;font-weight:700;color:#eaf9ea;min-width:180px;backdrop-filter: blur(2px);
+      transform:translateZ(0);transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s;
     }
-    .tag{font-weight:700;color:#7bd07b;letter-spacing:2px;margin-top:6px}
+    .svc:hover{transform:translateY(-8px) translateZ(18px);box-shadow:0 18px 48px rgba(0,0,0,0.45)}
 
-    /* Hero text */
-    .hero-title{font-size:30px;margin:10px 0 12px;color:#f3fff3;font-weight:700}
-    .lead{color:rgba(240,255,240,0.92);font-size:16.5px;line-height:1.6;max-width:60ch;margin-bottom:14px}
-
-    ul.services{list-style: none;padding:0;margin:0;display:grid;gap:8px}
-    ul.services li{position:relative;padding-left:22px;color:var(--muted);font-weight:600}
-    ul.services li::before{content:'•';position:absolute;left:0;top:0;color:var(--accent)}
-
+    /* CTAs */
     .cta-row{display:flex;gap:12px;align-items:center;margin-top:18px}
     .btn{
-      background:linear-gradient(180deg,var(--accent), #1f8a2a);border:none;padding:12px 18px;border-radius:999px;color:#05220a;font-weight:800;cursor:pointer;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.45), inset 0 -2px 0 rgba(0,0,0,0.06);
+      background:linear-gradient(180deg,var(--accent), var(--accent-2));border:none;padding:12px 18px;border-radius:999px;color:#05220a;font-weight:800;cursor:pointer;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.45), inset 0 -2px 0 rgba(0,0,0,0.06);
     }
     .ghost{padding:10px 14px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:700}
 
-    /* Right column */
+    /* RIGHT SIDE */
     .side{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04)}
     .contact-item{display:flex;gap:10px;align-items:center;font-weight:700;color:#f1fff1;margin-bottom:10px}
-    .contact-item small{display:block;color:var(--muted);font-weight:500}
+    .contact-item small{display:block;color:var(--muted);font-weight:600}
 
-    /* gallery */
-    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+    /* GALLERY */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
     @media(max-width:920px){ .gallery{grid-template-columns:repeat(2,1fr)} }
-    .gimg{height:100px;border-radius:10px;background-size:cover;background-position:center;box-shadow: 0 8px 30px rgba(2,6,2,0.6)}
+    .gimg{height:110px;border-radius:10px;background-size:cover;background-position:center;box-shadow:0 12px 36px rgba(2,6,2,0.6);transition:transform .25s}
+    .gimg:hover{transform:scale(1.03) translateY(-6px)}
 
-    /* contact form */
+    /* FORM */
     form input, form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-weight:600}
-    form textarea{min-height:90px;resize:vertical}
+    form textarea{min-height:96px;resize:vertical}
     .muted{color:var(--muted);font-weight:600;font-size:14px}
 
-    /* footer */
+    /* NAV / SIMPLE HEADER */
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 4px;color:var(--muted)}
+    .nav{display:flex;gap:12px;align-items:center}
+    .nav a{font-weight:700;color:rgba(230,255,230,0.9)}
+
+    /* FOOTER */
     footer{text-align:center;padding:24px 12px;color:var(--muted);font-size:14px;z-index:6}
 
-    /* floating animation & micro-interactions */
+    /* ANIMATION */
     .float{animation:float 6s ease-in-out infinite}
     @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700;color:var(--muted)}
 
-    /* utilities */
-    .row{display:flex;gap:12px;align-items:center}
-    .center{text-align:center}
+    /* SMALL */
+    @media(max-width:560px){
+      .logo{font-size:44px}
+      .hero-title{font-size:22px}
+      .svc{min-width:140px}
+    }
   </style>
 </head>
 <body>
-  <main class="stage" id="stage" aria-labelledby="hero-title">
-    <!-- Parallax layers -->
-    <div class="layer bg" data-depth="-0.6" aria-hidden="true"></div>
-    <div class="layer grain" data-depth="-0.28" aria-hidden="true"></div>
-    <div class="layer leaf float" data-depth="-0.12" style="left:6%;top:6%" aria-hidden="true"></div>
-    <div class="layer leaf float" data-depth="-0.18" style="right:8%;bottom:10%;width:360px;height:360px" aria-hidden="true"></div>
+  <!-- Top bar -->
+  <div class="topbar" role="banner" aria-label="Top bar">
+    <div style="display:flex;gap:12px;align-items:center">
+      <div style="font-weight:800;color:var(--accent);font-size:20px">Ecovista</div>
+      <div class="muted" style="font-weight:700">Gardening</div>
+    </div>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
 
-    <!-- Page content -->
+  <main class="stage" id="stage" aria-labelledby="hero-title">
+    <!-- background layers -->
+    <div class="layer bg" data-depth="-0.64" aria-hidden="true"></div>
+    <div class="layer soft-grid" data-depth="-0.28" aria-hidden="true"></div>
+    <div class="layer orb float" data-depth="-0.12" style="left:6%;top:6%" aria-hidden="true"></div>
+    <div class="layer orb small float" data-depth="-0.18" style="right:6%;bottom:8%" aria-hidden="true"></div>
+
     <div class="wrap">
-      <section class="card" id="card" role="region" aria-label="Ecovista introduction card">
+      <!-- main card -->
+      <section class="card" id="card" role="region" aria-label="Introduction card">
         <div>
           <div class="brand" aria-hidden="true">
             <div>
@@ -115,49 +140,60 @@
           </div>
 
           <h1 id="hero-title" class="hero-title">Transforming empty spaces into living art.</h1>
-          <p class="lead">We craft beautiful garden spaces across residential and commercial properties — vertical & balcony gardens, office & indoor greenery, and maintenance packages to keep them thriving.</p>
+          <p class="lead">We design, install, and maintain beautiful gardens — vertical & balcony gardens, indoor office greenery, and full maintenance packages across Lucknow and nearby areas.</p>
 
-          <ul class="services" aria-label="Services offered">
-            <li>Garden Setup & Design</li>
-            <li>Vertical & Balcony Gardens</li>
-            <li>Office & Indoor Plants</li>
-            <li>Maintenance & Care</li>
-          </ul>
-
-          <div class="cta-row" style="margin-top:18px">
-            <!-- WhatsApp - replace phone (country code +91 example) -->
-            <button class="btn" id="whatsappBtn" aria-label="Chat on WhatsApp">Book via WhatsApp</button>
-            <a class="ghost" href="#contact" aria-label="Contact form">Contact</a>
+          <div id="services" class="services" aria-label="Our services">
+            <div class="svc">Garden Design & Setup</div>
+            <div class="svc">Vertical & Balcony Gardens</div>
+            <div class="svc">Office & Indoor Plants</div>
+            <div class="svc">Maintenance & Care Plans</div>
+            <div class="svc">Custom Planters & Décor</div>
           </div>
 
-          <!-- quick gallery -->
-          <div class="gallery" aria-hidden="false" style="margin-top:18px">
+          <div class="cta-row" style="margin-top:16px">
+            <button class="btn" id="whatsappBtn">Book via WhatsApp</button>
+            <a class="ghost" href="#contact">Enquire</a>
+          </div>
+
+          <!-- Gallery preview -->
+          <div id="gallery" class="gallery" aria-label="Gallery">
             <div class="gimg" style="background-image:url('assets/p1.jpg')"></div>
             <div class="gimg" style="background-image:url('assets/p2.jpg')"></div>
             <div class="gimg" style="background-image:url('assets/p3.jpg')"></div>
           </div>
 
+          <!-- short about -->
+          <div style="margin-top:18px;color:var(--muted)">
+            <strong style="color:#f3fff3">Why Ecovista?</strong>
+            <p style="margin:6px 0 0">Local expertise, handpicked plants, sustainable materials, and maintenance plans so your garden stays healthy and beautiful year-round.</p>
+          </div>
         </div>
 
-        <!-- right column / contact -->
+        <!-- RIGHT: contact + form -->
         <aside class="side" id="contact" aria-labelledby="contact-heading">
           <h3 id="contact-heading" style="margin:0 0 12px;color:#fff">Contact</h3>
 
-          <div class="contact-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.9"><path d="M3 21v-2a6 6 0 016-6h0a6 6 0 016 6v2" stroke="#dfe" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div>+91 75186 499933</div><small class="muted">Phone / WhatsApp</small></div></div>
+          <div class="contact-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.92"><path d="M3 21v-2a6 6 0 016-6h0a6 6 0 016 6v2" stroke="#dfe" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><div>+91 75186 499933</div><small class="muted">Phone / WhatsApp</small></div>
+          </div>
 
-          <div class="contact-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.9"><path d="M3 8.5v7a3.5 3.5 0 003.5 3.5h11a3.5 3.5 0 003.5-3.5v-7" stroke="#dfe" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 6l-9 6-9-6" stroke="#dfe" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div>ecovistagardening@gmail.com</div><small class="muted">Email</small></div></div>
+          <div class="contact-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.92"><path d="M21 8v6a2 2 0 01-2 2H7" stroke="#dfe" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 6l9 6 9-6" stroke="#dfe" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><div>ecovistagardening@gmail.com</div><small class="muted">Email</small></div>
+          </div>
 
-          <div class="contact-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.9"><path d="M12 2C8.1 2 5 5.1 5 9c0 6 7 13 7 13s7-7 7-13c0-3.9-3.1-7-7-7z" stroke="#dfe" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div>Near Engineering Chauraha, Jankipuram, Lucknow</div><small class="muted">Address</small></div></div>
+          <div class="contact-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.92"><path d="M12 2C8.1 2 5 5.1 5 9c0 6 7 13 7 13s7-7 7-13c0-3.9-3.1-7-7-7z" stroke="#dfe" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><div>Near Engineering Chauraha, Jankipuram, Lucknow</div><small class="muted">Address</small></div>
+          </div>
 
           <hr style="margin:14px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
 
-          <p class="muted" style="margin:0 0 8px">Quick enquiry</p>
+          <p class="muted" style="margin:0 0 8px">Quick enquiry (we'll reply soon)</p>
 
-          <!-- CONTACT FORM:
-               For production: register at https://formspree.io and replace FORM_ENDPOINT below.
-               Or implement a serverless function on Vercel and set the action to that endpoint.
-          -->
-          <form id="leadForm" action="https://formspree.io/f/your-form-id" method="POST" data-endpoint="https://formspree.io/f/your-form-id">
+          <!-- FORM: Replace data-endpoint with your Formspree ID or serverless endpoint -->
+          <form id="leadForm" action="https://formspree.io/f/your-form-id" method="POST" data-endpoint="https://formspree.io/f/your-form-id" aria-label="Contact form">
             <label class="muted" style="font-size:13px">Name</label>
             <input name="name" required placeholder="Your name">
 
@@ -175,17 +211,18 @@
           </form>
 
           <div style="margin-top:16px" class="center">
-            <span class="badge">Follow: @ecovistagardening</span>
+            <span style="display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700;color:var(--muted)">Follow: @ecovistagardening</span>
           </div>
         </aside>
       </section>
 
+      <!-- EXTRA SECTION: Testimonials / About -->
       <section style="margin-top:30px;color:var(--muted);display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap">
         <div style="display:flex;gap:12px;align-items:center">
-          <strong style="font-weight:700">About</strong>
-          <span class="muted">Local garden designers & maintainers in Lucknow</span>
+          <strong style="font-weight:800;color:#f3fff3">About</strong>
+          <span>Local garden designers & maintainers — sustainable, beautiful, reliable.</span>
         </div>
-        <div class="row" style="gap:10px">
+        <div style="display:flex;gap:12px;align-items:center">
           <span class="muted">© <span id="year"></span> Ecovista Gardening</span>
         </div>
       </section>
@@ -197,10 +234,10 @@
   </main>
 
   <script>
-    // Populate year
+    // year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* ---------- Parallax / 3D tilt ---------- */
+    /* ---------- 3D PARALLAX & TILT ---------- */
     (function(){
       const stage = document.getElementById('stage');
       const layers = Array.from(stage.querySelectorAll('.layer'));
@@ -213,13 +250,9 @@
       window.addEventListener('mousemove', (e)=>{
         const cx = window.innerWidth/2, cy = window.innerHeight/2;
         const dx = e.clientX - cx, dy = e.clientY - cy;
-        const rx = mapRange(dy, -cy, cy, 10, -10);
-        const ry = mapRange(dx, -cx, cx, -12, 12);
-
-        // tilt card
-        card.style.transform = `rotateX(${rx/6}deg) rotateY(${ry/12}deg) translateZ(var(--card-depth))`;
-
-        // layers move
+        const rx = mapRange(dy, -cy, cy, 12, -12);
+        const ry = mapRange(dx, -cx, cx, -14, 14);
+        card.style.transform = `rotateX(${rx/8}deg) rotateY(${ry/12}deg) translateZ(var(--card-depth))`;
         layers.forEach(layer=>{
           const depth = Number(layer.dataset.depth) || -0.2;
           const moveX = -dx * depth * 0.02;
@@ -228,7 +261,7 @@
         });
       });
 
-      // device tilt fallback
+      // device tilt fallback for mobile
       if(window.DeviceOrientationEvent){
         window.addEventListener('deviceorientation', (ev)=>{
           const rx = ev.beta || 0;
@@ -242,53 +275,50 @@
     (function(){
       const whatsappBtn = document.getElementById('whatsappBtn');
       whatsappBtn.addEventListener('click', ()=>{
-        // Replace phoneNumber with your international number without + or leading zeros e.g. 919XXXXXXXXX
+        // REPLACE with your number without + (example: 919876543210)
         const phoneNumber = '9175186499933';
         const text = encodeURIComponent('Hello Ecovista, I would like a consultation for my garden.');
         window.open(`https://wa.me/${phoneNumber}?text=${text}`, '_blank');
       });
     })();
 
-    /* ---------- Simple form submit (works with Formspree or custom endpoint) ---------- */
+    /* ---------- Contact form handler (optional) ---------- */
     (function(){
       const form = document.getElementById('leadForm');
       const msg = document.getElementById('formMsg');
       const clearBtn = document.getElementById('clearBtn');
 
-      // if you want to handle via fetch instead of default HTML post,
-      // set data-endpoint attribute to your endpoint (Formspree / serverless).
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const endpoint = form.dataset.endpoint;
         const formData = new FormData(form);
-
         msg.textContent = 'Sending...';
 
-        // If user left the placeholder endpoint, fallback to default HTML submit:
+        // If endpoint still placeholder, show message and don't send
         if(!endpoint || endpoint.includes('your-form-id')){
-          msg.textContent = 'Please replace the form endpoint with your Formspree ID or server endpoint.';
+          msg.textContent = 'Replace the form endpoint (data-endpoint) with your Formspree ID or server endpoint to enable sending.';
           return;
         }
 
         try {
-          const response = await fetch(endpoint, {
-            method:'POST',
-            headers: {'Accept':'application/json'},
-            body: formData
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
           });
-          if(response.ok){
+          if(res.ok){
             msg.textContent = 'Thanks — your enquiry was sent. We will contact you soon.';
             form.reset();
           } else {
-            const data = await response.json();
-            msg.textContent = data.error || 'Submission failed. Please try again later.';
+            const data = await res.json();
+            msg.textContent = data.error || 'Submission failed. Try again later.';
           }
         } catch (err) {
           msg.textContent = 'Network error. Try again later.';
         }
       });
 
-      clearBtn.addEventListener('click', () => { form.reset(); msg.textContent=''; });
+      clearBtn.addEventListener('click', ()=>{ form.reset(); msg.textContent=''; });
     })();
   </script>
 </body>
